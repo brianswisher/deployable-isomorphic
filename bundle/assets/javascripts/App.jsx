@@ -10,7 +10,7 @@ class App extends React.Component {
             <title>React App</title>
         </head>
         <body data-json={this._getJson()}>
-          <div id="main">
+          <div id="viewport">
             <HelloWorld/>
           </div>
         </body>
@@ -37,7 +37,7 @@ class App extends React.Component {
     return '{"ENV":"' + this.props.ENV +
       '","path":"' + this.props.path +
       '","host":"' + this.props.host +
-      '}';
+      '"}';
   }
 
   _getMessage() {

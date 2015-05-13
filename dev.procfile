@@ -1,1 +1,3 @@
 web: npm run localhost
+sync: npm run sync
+bundle: npm run develop
