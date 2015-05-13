@@ -9,13 +9,15 @@ class App extends React.Component {
             <meta charSet="UTF-8"/>
             <title>React App</title>
         </head>
-        <body>
+        <body data-json={this._getJson()}>
           <div id="main">
             <HelloWorld/>
           </div>
         </body>
         <script type="text/javascript"
                 src={this._getModernizerPath()}></script>
+        <script type="text/javascript"
+                src={this._getAppPath()}></script>
        </html>
     );
   }
@@ -29,6 +31,13 @@ class App extends React.Component {
     }
 
     return '/' + filename;
+  }
+
+  _getJson() {
+    return '{"ENV":"' + this.props.ENV +
+      '","path":"' + this.props.path +
+      '","host":"' + this.props.host +
+      '}';
   }
 
   _getMessage() {
