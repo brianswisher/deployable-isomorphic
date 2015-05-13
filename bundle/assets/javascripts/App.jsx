@@ -1,5 +1,5 @@
 class App extends require('react').Component {
   render() {
-    return <div>App</div>;
+    return <div>App; deployable-isomorphic</div>;
   }
 }
