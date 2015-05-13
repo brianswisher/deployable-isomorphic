@@ -1,2 +1,2 @@
-# deployable
-A cloneable bare bones ExpressJS app, deployable to Heroku
+# deployable-isomorphic
+A cloneable bare bones isomorphic ExpressJS app, deployable to Heroku
