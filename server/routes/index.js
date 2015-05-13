@@ -4,13 +4,19 @@
   var express = require('express');
   var router = express.Router();
   var React = require('react');
-  // var App = React.createFactory(
-  //   require('../../bundle/assets/javascripts/App.jsx')
-  // );
+  var ReactAsync = require('react-async');
+  var App = React.createFactory(
+    require('../../bundle/assets/javascripts/App.jsx')
+  );
 
   // catch all at bottom
   router.get('*', function(req, res) {
-    res.send('deployable-isomorphic');
+    ReactAsync.renderToStringAsync(
+      App({}),
+      function(err, markup) {
+        res.send('<!DOCTYPE html>'+markup);
+      }
+    );
   });
 
   module.exports = router;

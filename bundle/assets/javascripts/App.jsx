@@ -1,5 +1,9 @@
-class App extends require('react').Component {
+import React from 'react';
+
+class HelloWorld extends React.Component {
   render() {
-    return <div>App; deployable-isomorphic</div>;
+    return <p>Hello, world!</p>;
   }
 }
+
+export default HelloWorld;
