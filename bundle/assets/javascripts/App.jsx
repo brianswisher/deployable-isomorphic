@@ -7,29 +7,17 @@ class App extends React.Component {
   constructor(props) {
     super(props);
 
-    var path = this.props.path;
-
     this.state = {
-      component: <a href="/b" onClick={this.handleClick}>a</a>
+      screen: null
     };
   }
 
+  componentWillMount() {
+    this._routeInit();
+  }
+
   componentDidMount() {
-    var that = this;
-
-    Page('/', function (ctx) {
-      that.setState({ component: <a href="/b" onClick={that.handleClick}>a</a> });
-    });
-
-    Page('/b', function (ctx) {
-      that.setState({ component: <a href="/bb" onClick={that.handleClick}>b</a> });
-    });
-
-    Page('*', function (ctx) {
-      that.setState({ component: <a href="/" onClick={that.handleClick}>404</a> });
-    });
-
-    Page.start();
+    this._route();
   }
 
   handleClick(e) {
@@ -47,17 +35,14 @@ class App extends React.Component {
         </head>
         <body data-json={this._getJson()}>
           <div id="viewport">
-            {this.state.component}
+            {this.state.screen}
           </div>
         </body>
-        <script type="text/javascript"
-                src={this._getModernizerPath()}></script>
         <script type="text/javascript"
                 src={this._getAppPath()}></script>
        </html>
     );
   }
-
 
   _getAppPath() {
     var filename = 'app.bundle.js';
@@ -69,6 +54,10 @@ class App extends React.Component {
     return '/' + filename;
   }
 
+  _getContent() {
+    var path = this.props.path;
+  }
+
   _getJson() {
     return '{"ENV":"' + this.props.ENV +
       '","path":"' + this.props.path +
@@ -76,12 +65,47 @@ class App extends React.Component {
       '"}';
   }
 
-  _getMessage() {
-    return 'hello world';
+  _route() {
+    var that = this;
+    var {path} = this.props;
+
+    Page('/', function (ctx) {
+      that.setState({ screen: that._screenHome() });
+    });
+
+    Page('/b', function (ctx) {
+      that.setState({ screen: that._screenOne() });
+    });
+
+    Page('*', function (ctx) {
+      that.setState({ screen: that._screen404() });
+    });
+
+    Page.start();
   }
 
-  _getModernizerPath() {
-    return 'https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js';
+  _routeInit() {
+    var {path} = this.props;
+
+    if (path === '/') {
+      this.state.screen = this._screenHome()
+    } else if (path === '/b') {
+      this.state.screen = this._screenOne()
+    } else {
+      this.state.screen = this._screen404()
+    }
+  }
+
+  _screenHome() {
+    return <a href="/b" onClick={this.handleClick}>a</a>
+  }
+
+  _screenOne() {
+    return <a href="/bb" onClick={this.handleClick}>b</a>
+  }
+
+  _screen404() {
+    return <a href="/" onClick={this.handleClick}>404</a>
   }
 }
 
