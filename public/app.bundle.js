@@ -3323,6 +3323,9 @@
                     style: this.state.style
                 }, this.state.screen)), d["default"].createElement("script", {
                     type: "text/javascript",
+                    src: "/modernizr.js"
+                }), d["default"].createElement("script", {
+                    type: "text/javascript",
                     src: this._getAppPath()
                 }));
             }
@@ -3423,7 +3426,7 @@
         return r(t, e), o(t, [ {
             key: "render",
             value: function() {
-                return c["default"].createElement("p", null, "Device");
+                return c["default"].createElement("p", null, "Hello, world!");
             }
         } ]), t;
     }(c["default"].Component);
@@ -3445,7 +3448,7 @@
             key: "componentDidMount",
             value: function() {
                 this.state.style = {
-                    color: "black",
+                    color: "blue",
                     width: "80%",
                     display: "inline-block",
                     fontSize: 16,

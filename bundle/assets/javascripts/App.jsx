@@ -1,4 +1,4 @@
-import Device from './app/Device.jsx';
+import HelloWorld from './app/HelloWorld.jsx';
 import React from 'react';
 import Page from 'page';
 import Screen from './app/Screen.jsx';
@@ -44,6 +44,8 @@ class App extends React.Component {
             {this.state.screen}
           </div>
         </body>
+        <script type="text/javascript"
+                src="/modernizr.js"></script>
         <script type="text/javascript"
                 src={this._getAppPath()}></script>
        </html>
@@ -115,7 +117,7 @@ class App extends React.Component {
           isomorphic
         </a>
         <br/>
-        <Device/>
+        <HelloWorld/>
       </div>
     )
   }

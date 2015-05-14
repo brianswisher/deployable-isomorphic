@@ -12,7 +12,7 @@ class Screen extends React.Component {
 
   componentDidMount() {
     this.state.style = {
-      color: 'black',
+      color: 'blue',
       width: '80%',
       display: 'inline-block',
       fontSize: 16,
