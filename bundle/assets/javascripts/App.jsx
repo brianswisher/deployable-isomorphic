@@ -7,6 +7,15 @@ import {text} from './config';
 
 class App extends React.Component {
 
+  static css() {
+    return (`
+      & {
+        font-family: arial;
+        text-align: center;
+      }
+    `);
+  }
+
   constructor(props) {
     super(props);
 
@@ -37,7 +46,7 @@ class App extends React.Component {
             <title>React App</title>
         </head>
         <body data-json={this._getJson()}>
-          <InlineCss stylesheet={App.css()} namespace="App">
+          <InlineCss stylesheet={App.css()} namespace="viewport">
             {this.state.screen}
           </InlineCss>
         </body>
@@ -47,15 +56,6 @@ class App extends React.Component {
                 src={this._getAppPath()}></script>
        </html>
     );
-  }
-
-  static css () {
-    return (`
-      & {
-        font-family: arial;
-        text-align: center;
-      }
-    `);
   }
 
   _getAppPath() {
