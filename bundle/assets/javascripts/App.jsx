@@ -2,7 +2,7 @@ import Device from './app/Device.jsx';
 import React from 'react';
 import Page from 'page';
 import Screen from './app/Screen.jsx';
-import text from './text';
+import {text} from './config';
 
 class App extends React.Component {
 
@@ -10,7 +10,11 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      screen: null
+      screen: null,
+      style: {
+        fontFamily: 'arial',
+        textAlign: 'center'
+      }
     };
   }
 
@@ -36,7 +40,7 @@ class App extends React.Component {
             <title>React App</title>
         </head>
         <body data-json={this._getJson()}>
-          <div id="viewport">
+          <div id="viewport" style={this.state.style}>
             {this.state.screen}
           </div>
         </body>
@@ -110,6 +114,7 @@ class App extends React.Component {
         <a href="/one" onClick={this.handleLink}>
           isomorphic
         </a>
+        <br/>
         <Device/>
       </div>
     )
@@ -121,7 +126,8 @@ class App extends React.Component {
         <a href="/two" onClick={this.handleLink}>
           one
         </a>
-        <Screen text={text[0]}/>
+        <br/>
+        <Screen text={[text[0], text[1]]}/>
       </div>
     )
   }
@@ -132,7 +138,8 @@ class App extends React.Component {
         <a href="/missing" onClick={this.handleLink}>
           two
         </a>
-        <Screen text={text[1]}/>
+        <br/>
+        <Screen text={[text[1], text[2]]}/>
       </div>
     )
   }
