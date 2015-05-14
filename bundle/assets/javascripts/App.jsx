@@ -1,7 +1,43 @@
 import React from 'react';
 import HelloWorld from './app/HelloWorld.jsx';
+import Page from 'page';
 
 class App extends React.Component {
+
+  constructor(props) {
+    super(props);
+
+    var path = this.props.path;
+
+    this.state = {
+      component: <a href="/b" onClick={this.handleClick}>a</a>
+    };
+  }
+
+  componentDidMount() {
+    var that = this;
+
+    Page('/', function (ctx) {
+      that.setState({ component: <a href="/b" onClick={that.handleClick}>a</a> });
+    });
+
+    Page('/b', function (ctx) {
+      that.setState({ component: <a href="/bb" onClick={that.handleClick}>b</a> });
+    });
+
+    Page('*', function (ctx) {
+      that.setState({ component: <a href="/" onClick={that.handleClick}>404</a> });
+    });
+
+    Page.start();
+  }
+
+  handleClick(e) {
+    e.preventDefault();
+
+    Page(e.target.getAttribute('href'));
+  }
+
   render() {
     return (
       <html>
@@ -11,7 +47,7 @@ class App extends React.Component {
         </head>
         <body data-json={this._getJson()}>
           <div id="viewport">
-            <HelloWorld/>
+            {this.state.component}
           </div>
         </body>
         <script type="text/javascript"
