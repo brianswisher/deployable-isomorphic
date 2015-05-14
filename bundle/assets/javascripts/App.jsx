@@ -1,6 +1,8 @@
+import Device from './app/Device.jsx';
 import React from 'react';
-import HelloWorld from './app/HelloWorld.jsx';
 import Page from 'page';
+import Screen from './app/Screen.jsx';
+import text from './text';
 
 class App extends React.Component {
 
@@ -20,7 +22,7 @@ class App extends React.Component {
     this._route();
   }
 
-  handleClick(e) {
+  handleLink(e) {
     e.preventDefault();
 
     Page(e.target.getAttribute('href'));
@@ -73,8 +75,12 @@ class App extends React.Component {
       that.setState({ screen: that._screenHome() });
     });
 
-    Page('/b', function (ctx) {
+    Page('/one', function (ctx) {
       that.setState({ screen: that._screenOne() });
+    });
+
+    Page('/two', function (ctx) {
+      that.setState({ screen: that._screenTwo() });
     });
 
     Page('*', function (ctx) {
@@ -89,23 +95,59 @@ class App extends React.Component {
 
     if (path === '/') {
       this.state.screen = this._screenHome()
-    } else if (path === '/b') {
+    } else if (path === '/one') {
       this.state.screen = this._screenOne()
+    } else if (path === '/two') {
+      this.state.screen = this._screenTwo()
     } else {
       this.state.screen = this._screen404()
     }
   }
 
   _screenHome() {
-    return <a href="/b" onClick={this.handleClick}>a</a>
+    return (
+      <div>
+        <a href="/one" onClick={this.handleLink}>
+          isomorphic
+        </a>
+        <Device/>
+      </div>
+    )
   }
 
   _screenOne() {
-    return <a href="/bb" onClick={this.handleClick}>b</a>
+    return (
+      <div>
+        <a href="/two" onClick={this.handleLink}>
+          one
+        </a>
+        <Screen text={text[0]}/>
+      </div>
+    )
+  }
+
+  _screenTwo() {
+    return (
+      <div>
+        <a href="/missing" onClick={this.handleLink}>
+          two
+        </a>
+        <Screen text={text[1]}/>
+      </div>
+    )
   }
 
   _screen404() {
-    return <a href="/" onClick={this.handleClick}>404</a>
+    return (
+      <div>
+        <a href="/" onClick={this.handleLink}>
+          404
+        </a>
+        <p>
+          The page you were looking for was not found!
+        </p>
+      </div>
+    )
   }
 }
 
