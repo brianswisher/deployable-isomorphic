@@ -1,4 +1,5 @@
 import HelloWorld from './app/HelloWorld.jsx';
+import InlineCss from 'react-inline-css';
 import React from 'react';
 import Page from 'page';
 import Screen from './app/Screen.jsx';
@@ -10,11 +11,7 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      screen: null,
-      style: {
-        fontFamily: 'arial',
-        textAlign: 'center'
-      }
+      screen: null
     };
   }
 
@@ -40,9 +37,9 @@ class App extends React.Component {
             <title>React App</title>
         </head>
         <body data-json={this._getJson()}>
-          <div id="viewport" style={this.state.style}>
+          <InlineCss stylesheet={App.css()} namespace="App">
             {this.state.screen}
-          </div>
+          </InlineCss>
         </body>
         <script type="text/javascript"
                 src="/modernizr.js"></script>
@@ -50,6 +47,15 @@ class App extends React.Component {
                 src={this._getAppPath()}></script>
        </html>
     );
+  }
+
+  static css () {
+    return (`
+      & {
+        font-family: arial;
+        text-align: center;
+      }
+    `);
   }
 
   _getAppPath() {
