@@ -3457,9 +3457,7 @@
         displayName: "HelloWorld",
         mixins: [ s["default"].Mixin ],
         getInitialStateAsync: function(e) {
-            var t = "http";
-            this.props.encrypted && (t += "s"), "undefined" === this.props.encrypted && (t = window.location.protocol), 
-            c["default"].get(t + "://" + this.props.host + "/data.json", function(t, n) {
+            c["default"].get(this._endPoint(), function(t, n) {
                 e(t, {
                     async: n.body
                 });
@@ -3467,6 +3465,11 @@
         },
         render: function() {
             return i["default"].createElement("div", null, i["default"].createElement("p", null, this._message()));
+        },
+        _endPoint: function() {
+            var e = "http";
+            return this.props.encrypted && (e += "s"), "undefined" === this.props.encrypted && (e = window.location.protocol.substr(0, 4)), 
+            e + "://" + this.props.host + "/data.json";
         },
         _message: function() {
             var e = "";
