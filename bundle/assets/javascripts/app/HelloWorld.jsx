@@ -17,7 +17,7 @@ module.exports =
       }
 
       if (this.props.encrypted === 'undefined') {
-        protocol = protocol.substr(0,4);
+        protocol = window.location.protocol;
       }
 
       request.get(

@@ -3458,7 +3458,7 @@
         mixins: [ s["default"].Mixin ],
         getInitialStateAsync: function(e) {
             var t = "http";
-            this.props.encrypted && (t += "s"), "undefined" === this.props.encrypted && (t = t.substr(0, 4)), 
+            this.props.encrypted && (t += "s"), "undefined" === this.props.encrypted && (t = window.location.protocol), 
             c["default"].get(t + "://" + this.props.host + "/data.json", function(t, n) {
                 e(t, {
                     async: n.body
