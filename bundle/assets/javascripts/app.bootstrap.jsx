@@ -21,6 +21,7 @@ if (typeof window !== 'undefined') {
     React.render(
       App({
         path: json.path,
+        encrypted: json.encrypted,
         ENV: json.ENV,
         host: getHost()
       }),

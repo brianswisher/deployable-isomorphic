@@ -21,8 +21,10 @@ router.get('*', (req, res) => {
 
     return host;
   }
+
   let data = {
     path: path,
+    encrypted: req.connection.encrypted,
     ENV: ENV,
     host: getHost()
   };

@@ -77,6 +77,7 @@ class App extends React.Component {
 
     json += '{"ENV":"' + this.props.ENV
     json += '","path":"' + this.props.path
+    json += '","encrypted":"' + this.props.encrypted
     json += '","host":"' + this.props.host
     json += '"}'
 

@@ -20,6 +20,7 @@
         };
         i["default"].render(a({
             path: e.path,
+            encrypted: e.encrypted,
             ENV: e.ENV,
             host: t()
         }), document);
@@ -3373,8 +3374,8 @@
             key: "_getJson",
             value: function() {
                 var e = "";
-                return e += '{"ENV":"' + this.props.ENV, e += '","path":"' + this.props.path, e += '","host":"' + this.props.host, 
-                e += '"}';
+                return e += '{"ENV":"' + this.props.ENV, e += '","path":"' + this.props.path, e += '","encrypted":"' + this.props.encrypted, 
+                e += '","host":"' + this.props.host, e += '"}';
             }
         }, {
             key: "_route",
@@ -3456,7 +3457,9 @@
         displayName: "HelloWorld",
         mixins: [ s["default"].Mixin ],
         getInitialStateAsync: function(e) {
-            c["default"].get("http://" + this.props.host + "/data.json", function(t, n) {
+            var t = "http";
+            this.props.encrypted && (t += "s"), "undefined" === this.props.encrypted && (t = t.substr(0, 4)), 
+            c["default"].get(t + "://" + this.props.host + "/data.json", function(t, n) {
                 e(t, {
                     async: n.body
                 });

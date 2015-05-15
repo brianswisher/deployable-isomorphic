@@ -10,8 +10,18 @@ module.exports =
     mixins: [ReactAsync.Mixin],
 
     getInitialStateAsync: function(cb) {
+      var protocol = 'http';
+
+      if (this.props.encrypted) {
+        protocol += 's';
+      }
+
+      if (this.props.encrypted === 'undefined') {
+        protocol = protocol.substr(0,4);
+      }
+
       request.get(
-        'http://' + this.props.host + '/data.json',
+        protocol + '://' + this.props.host + '/data.json',
         function(error, response) {
           cb(error, {async: response.body});
         }
