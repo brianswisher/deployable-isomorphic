@@ -11,7 +11,7 @@ module.exports =
 
     getInitialStateAsync: function(cb) {
       request.get(
-        this._endPoint(),
+        this._endPoint('/data.json'),
         function(error, response) {
           cb(error, {async: response.body});
         }
@@ -26,7 +26,7 @@ module.exports =
       )
     },
 
-    _endPoint: function() {
+    _endPoint: function(path) {
       var protocol = 'http';
       var endpoint;
 
@@ -36,14 +36,13 @@ module.exports =
 
       if (this.props.encrypted === 'undefined') {
         protocol = window.location.protocol;
-        protocol = 'https:';
 
         if (protocol.slice(-1) === ':') {
           protocol = protocol.substr(0,protocol.length - 1);
         }
       }
-      console.log(protocol);
-      return protocol + '://' + this.props.host + '/data.json';
+
+      return protocol + '://' + this.props.host + path;
     },
 
     _message: function() {
