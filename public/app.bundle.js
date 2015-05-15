@@ -3457,7 +3457,7 @@
         displayName: "HelloWorld",
         mixins: [ s["default"].Mixin ],
         getInitialStateAsync: function(e) {
-            c["default"].get(this._endPoint("/data.json"), function(t, n) {
+            c["default"].get(this._localEndPoint("/data.json"), function(t, n) {
                 e(t, {
                     async: n.body
                 });
@@ -3466,7 +3466,7 @@
         render: function() {
             return i["default"].createElement("div", null, i["default"].createElement("p", null, this._message()));
         },
-        _endPoint: function(e) {
+        _localEndPoint: function(e) {
             var t = "http";
             return this.props.encrypted && (t += "s"), "undefined" === this.props.encrypted && (t = window.location.protocol, 
             ":" === t.slice(-1) && (t = t.substr(0, t.length - 1))), t + "://" + this.props.host + e;

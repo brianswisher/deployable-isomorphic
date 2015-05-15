@@ -11,7 +11,7 @@ module.exports =
 
     getInitialStateAsync: function(cb) {
       request.get(
-        this._endPoint('/data.json'),
+        this._localEndPoint('/data.json'),
         function(error, response) {
           cb(error, {async: response.body});
         }
@@ -26,7 +26,7 @@ module.exports =
       )
     },
 
-    _endPoint: function(path) {
+    _localEndPoint: function(path) {
       var protocol = 'http';
       var endpoint;
 
