@@ -3469,7 +3469,8 @@
         _endPoint: function() {
             var e = "http";
             return this.props.encrypted && (e += "s"), "undefined" === this.props.encrypted && (e = window.location.protocol, 
-            e = "https:", ":" === e.slice(-1) && (e = e.substr(0, 4))), console.log(e), e + "://" + this.props.host + "/data.json";
+            e = "https:", ":" === e.slice(-1) && (e = e.substr(0, e.length - 1))), console.log(e), 
+            e + "://" + this.props.host + "/data.json";
         },
         _message: function() {
             var e = "";

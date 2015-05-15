@@ -39,9 +39,8 @@ module.exports =
         protocol = 'https:';
 
         if (protocol.slice(-1) === ':') {
-          protocol = protocol.substr(0,4);
+          protocol = protocol.substr(0,protocol.length - 1);
         }
-        // protocol = window.location.protocol.substr(0,4);
       }
       console.log(protocol);
       return protocol + '://' + this.props.host + '/data.json';
