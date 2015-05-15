@@ -36,6 +36,11 @@ module.exports =
 
       if (this.props.encrypted === 'undefined') {
         protocol = window.location.protocol;
+        protocol = 'https:';
+
+        if (protocol.slice(-1) === ':') {
+          protocol = protocol.substr(0,4);
+        }
         // protocol = window.location.protocol.substr(0,4);
       }
       console.log(protocol);
