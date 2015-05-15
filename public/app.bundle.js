@@ -3468,8 +3468,8 @@
         },
         _endPoint: function() {
             var e = "http";
-            return this.props.encrypted && (e += "s"), "undefined" === this.props.encrypted && (e = window.location.protocol.substr(0, 4)), 
-            e + "://" + this.props.host + "/data.json";
+            return this.props.encrypted && (e += "s"), "undefined" === this.props.encrypted && (e = window.location.protocol), 
+            console.log(e), e + "://" + this.props.host + "/data.json";
         },
         _message: function() {
             var e = "";
