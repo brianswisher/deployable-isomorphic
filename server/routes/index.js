@@ -1,43 +1,39 @@
-(function() {
-  'use strict';
+'use strict';
 
-  var ENV = process.env.ENV;
+import appJSX from "../../bundle/assets/javascripts/App.jsx";
+import express from "express";
+import {parse} from "url";
+import {createFactory} from "react";
+import {renderToStringAsync} from "react-async";
 
-  var express = require('express');
-  var router = express.Router();
-  var url = require('url');
-  var React = require('react');
-  var ReactAsync = require('react-async');
+let App = createFactory(appJSX);
+let ENV = process.env.ENV;
+let router = express.Router();
 
-  var App = React.createFactory(
-    require('../../bundle/assets/javascripts/App.jsx')
-  );
+router.get('*', (req, res) => {
+  let path = parse(req.url).pathname;
+  let getHost = function() {
+    let host = req.headers.host.toString();
 
-  // catch all at bottom
-  router.get('*', function(req, res) {
-    var path = url.parse(req.url).pathname;
-
-    var getHost = function() {
-      var host = req.headers.host.toString();
-
-      if (ENV === 'development') {
-        return host.substring(0, host.length - 1) + 1;
-      } else {
-        return host;
-      }
+    if (ENV === 'development') {
+      return host.substring(0, host.length - 1) + 1;
     }
 
-    ReactAsync.renderToStringAsync(
-      App({
-        path: path,
-        ENV: ENV,
-        host: getHost()
-      }),
-      function(err, markup) {
-        res.send('<!DOCTYPE html>'+markup);
-      }
-    );
-  });
+    return host;
+  }
+  let data = {
+    path: path,
+    ENV: ENV,
+    host: getHost()
+  };
 
-  module.exports = router;
-}());
+  renderToStringAsync(new App(data), (err, markup) => {
+    if (err) {
+      throw err;
+    }
+
+    res.send(`<!DOCTYPE html>${markup}`);
+  });
+});
+
+export default router;

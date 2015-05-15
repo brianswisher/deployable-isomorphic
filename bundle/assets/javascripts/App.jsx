@@ -73,10 +73,14 @@ class App extends React.Component {
   }
 
   _getJson() {
-    return '{"ENV":"' + this.props.ENV +
-      '","path":"' + this.props.path +
-      '","host":"' + this.props.host +
-      '"}';
+    var json = ''
+
+    json += '{"ENV":"' + this.props.ENV
+    json += '","path":"' + this.props.path
+    json += '","host":"' + this.props.host
+    json += '"}'
+
+    return json;
   }
 
   _route() {
@@ -123,7 +127,7 @@ class App extends React.Component {
           isomorphic
         </a>
         <br/>
-        <HelloWorld/>
+        <HelloWorld {...this.props}/>
       </div>
     )
   }

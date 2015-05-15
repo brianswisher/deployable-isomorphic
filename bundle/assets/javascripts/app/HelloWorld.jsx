@@ -1,9 +1,38 @@
 import React from 'react';
+import ReactAsync from 'react-async';
+import request from 'superagent';
 
-class HelloWorld extends React.Component {
-  render() {
-    return <p>Hello, world!</p>;
-  }
-}
+module.exports =
+  React.createClass({
 
-export default HelloWorld;
+    displayName: 'HelloWorld',
+
+    mixins: [ReactAsync.Mixin],
+
+    getInitialStateAsync: function(cb) {
+      request.get(
+        'http://' + this.props.host + '/data.json',
+        function(error, response) {
+          cb(error, {async: response.body});
+        }
+      );
+    },
+
+    render: function() {
+      return (
+        <div>
+          <p>{this._message()}</p>
+        </div>
+      )
+    },
+
+    _message: function() {
+      var message = '';
+
+      if (this.state.async) {
+        message = this.state.async.message
+      }
+
+      return message;
+    }
+  });

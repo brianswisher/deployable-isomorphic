@@ -38,6 +38,7 @@
     "react": "^0.13.3",
     "react-async": "^2.1.0",
     "react-inline-css": "^1.1.1",
+    "superagent": "^1.2.0",
     "webpack": "^1.9.5"
   }
 }
